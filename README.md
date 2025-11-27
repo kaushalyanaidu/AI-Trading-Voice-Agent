@@ -274,18 +274,8 @@ Speak to your bot:
 Example Output:
 
 
+<img width="741" height="400" alt="image" src="https://github.com/user-attachments/assets/c8faf149-efda-486d-b7ba-4bcdbf31f794" />
 
-Ticker: NVDA
-
-Recommendation: buy
-
-Entry: 112.40
-
-Stop Loss: 108.10
-
-Take Profit: 121.50
-
-Justification: Strong technical momentum supported by...
 
 ##### 
 
@@ -298,3 +288,4 @@ Justification: Strong technical momentum supported by...
 * Confidence scores
 * Custom risk profile options
 * Dashboard for trade history
+
