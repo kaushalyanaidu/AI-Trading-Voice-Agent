@@ -1,16 +1,16 @@
-#AI Trading Advisor: Voice-Driven Technical and News-Based Market Analysis
-##Project Overview
+# AI Trading Advisor: Voice-Driven Technical and News-Based Market Analysis
+## Project Overview
 
 This project builds an automated AI trading advisor that processes voice commands, retrieves real-time market data, analyzes news sentiment, and generates actionable trading recommendations. The analysis focuses on multi-timeframe technical patterns, sentiment interpretation, and integrated decision-making for buy, sell, or hold strategies.
 
-##Key Objectives
+## Key Objectives
 
 - Analyze short-term and medium-term price movements across multiple timeframes
 - Evaluate sentiment direction based on recent news articles
 - Assess combined influence of technical trends and sentiment on trade decisions
 - Develop automated, data-driven trading recommendations with entry, stop-loss, and take-profit levels
 
-##Dataset Description
+## Dataset Description
 
 The analysis uses data and inputs collected from:
 
@@ -22,14 +22,17 @@ The analysis uses data and inputs collected from:
 
 Note: Due to security and API restrictions, no API keys or environment variables are included in this repository. Please refer to the setup section for configuration details.
 
-##Repository Structure
+## Repository Structure
+
+```
 ai-trading-advisor/
 ├── workflows/
-│   └── Day_Trader.json            # Main automation workflow
+│   └── Day_Trader.json          # Main automation workflow
 ├── examples/
-│   └── sample_output.json         # Example trading output
-├── images/                        # Workflow and system diagrams
+│   └── sample_output.json       # Example trading output
+├── images/                      # Workflow and system diagrams
 └── README.md
+```
 
 ##Key Findings
 
@@ -54,22 +57,26 @@ ai-trading-advisor/
 - Voice-based pipeline significantly reduces analysis time
 - Structured JSON outputs allow seamless integration with future systems
 
-##Technologies Used
+## Technologies Used
 
--n8n for workflow automation
+- n8n for workflow automation
 - OpenAI Whisper and GPT-4.1 models
 - Polygon.io APIs for market and news data
 - JavaScript for custom logic and extraction
 - Telegram Bot API for user interaction
 
-##Getting Started
+## Getting Started
 
 1.Clone this repository
+
 2.Import the workflow file into n8n
+
 3.Configure required API keys for Polygon.io, OpenAI, and Telegram
+
 4.Send a voice message to the Telegram bot to trigger analysis
 
 
 License
 
 This project is licensed under the MIT License - see the LICENSE file for details.
+
