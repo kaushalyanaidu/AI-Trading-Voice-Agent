@@ -1,0 +1,800 @@
+{
+  "name": "Day Trader",
+  "nodes": [
+    {
+      "parameters": {
+        "model": {
+          "__rl": true,
+          "mode": "list",
+          "value": "gpt-4.1-mini"
+        },
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+      "typeVersion": 1.2,
+      "position": [
+        592,
+        848
+      ],
+      "id": "4eb5e1f7-04c7-48e1-84b4-2b558d4a8286",
+      "name": "OpenAI Chat Model",
+      "credentials": {
+        "openAiApi": {
+          "id": "mjeY0rB89rhLQJs2",
+          "name": "OpenAi to use"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "aggregate": "aggregateAllItemData",
+        "destinationFieldName": "data all",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.aggregate",
+      "typeVersion": 1,
+      "position": [
+        1168,
+        416
+      ],
+      "id": "854dfd5d-0b62-4055-b310-89cd8121a919",
+      "name": "Aggregate2"
+    },
+    {
+      "parameters": {
+        "model": {
+          "__rl": true,
+          "mode": "list",
+          "value": "gpt-4.1-mini"
+        },
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+      "typeVersion": 1.2,
+      "position": [
+        880,
+        880
+      ],
+      "id": "ddbb98f8-e09e-49aa-bf52-0fddfff4adcb",
+      "name": "OpenAI Chat Model1",
+      "credentials": {
+        "openAiApi": {
+          "id": "mjeY0rB89rhLQJs2",
+          "name": "OpenAi to use"
+        }
+      }
+    },
+    {
+      "parameters": {},
+      "type": "@n8n/n8n-nodes-langchain.toolThink",
+      "typeVersion": 1,
+      "position": [
+        1040,
+        896
+      ],
+      "id": "d205bf27-e712-4302-9d7b-ee9da761b269",
+      "name": "Think"
+    },
+    {
+      "parameters": {
+        "aggregate": "aggregateAllItemData",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.aggregate",
+      "typeVersion": 1,
+      "position": [
+        848,
+        416
+      ],
+      "id": "f5882c2b-449d-4787-af39-8f68432258d2",
+      "name": "Aggregate3"
+    },
+    {
+      "parameters": {
+        "jsonSchemaExample": "{\n  \"ticker\": \"<TICKER_SYMBOL>\",\n  \"sentiment\": \"<positive | neutral | negative>\",\n  \"summary\": \"<brief explanation of sentiment>\"\n}"
+      },
+      "type": "@n8n/n8n-nodes-langchain.outputParserStructured",
+      "typeVersion": 1.3,
+      "position": [
+        752,
+        848
+      ],
+      "id": "70eb9532-9839-47c5-a360-748c98333fe1",
+      "name": "Structured Output Parser2"
+    },
+    {
+      "parameters": {
+        "jsonSchemaExample": "{\n  \"recommendation\": \"<buy | sell | hold>\",\n  \"entry_point\": \"<number>\",\n  \"stop_loss\": \"<number>\",\n  \"take_profit\": \"<number>\",\n  \"justification\": \"<3–4 sentences explaining the decision>\"\n}\n"
+      },
+      "type": "@n8n/n8n-nodes-langchain.outputParserStructured",
+      "typeVersion": 1.3,
+      "position": [
+        1216,
+        880
+      ],
+      "id": "03db3def-d1e6-4647-a700-a23293d407c1",
+      "name": "Structured Output Parser3"
+    },
+    {
+      "parameters": {
+        "content": "## Input Ticker/Stock\n",
+        "height": 308,
+        "width": 1524
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        0,
+        0
+      ],
+      "typeVersion": 1,
+      "id": "7d5e4d28-51e6-43b8-a2de-c8689a75e77d",
+      "name": "Sticky Note5"
+    },
+    {
+      "parameters": {
+        "content": "## Analyze",
+        "height": 380,
+        "width": 760,
+        "color": 3
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        560,
+        640
+      ],
+      "typeVersion": 1,
+      "id": "fd4d99a1-a0e1-44bf-8c95-058dcd457327",
+      "name": "Sticky Note6"
+    },
+    {
+      "parameters": {
+        "content": "## Combining Data",
+        "height": 308,
+        "width": 964,
+        "color": 5
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        560,
+        320
+      ],
+      "typeVersion": 1,
+      "id": "057495fb-5490-4257-ac94-7b1879e364c9",
+      "name": "Sticky Note7"
+    },
+    {
+      "parameters": {
+        "updates": [
+          "message"
+        ],
+        "additionalFields": {}
+      },
+      "type": "n8n-nodes-base.telegramTrigger",
+      "typeVersion": 1.2,
+      "position": [
+        176,
+        96
+      ],
+      "id": "8531d02b-a8a4-40e8-a78a-33950b23f360",
+      "name": "Telegram Message",
+      "webhookId": "760a574d-3b40-4f14-bc79-c003957656f7",
+      "credentials": {
+        "telegramApi": {
+          "id": "W26QjWJJ0vYCLFel",
+          "name": "Telegram new"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "resource": "file",
+        "fileId": "={{ $json.message.voice.file_id }}",
+        "additionalFields": {}
+      },
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [
+        736,
+        96
+      ],
+      "id": "e9fa3625-360b-4602-87f1-a6d0d028a868",
+      "name": "Telegram File ID",
+      "webhookId": "2e0faa8c-2799-468f-be6e-9adffe74791c",
+      "credentials": {
+        "telegramApi": {
+          "id": "W26QjWJJ0vYCLFel",
+          "name": "Telegram new"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "resource": "audio",
+        "operation": "transcribe",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.openAi",
+      "typeVersion": 1.8,
+      "position": [
+        1024,
+        96
+      ],
+      "id": "60fb140a-ea4d-479f-850f-c6bd886175bf",
+      "name": "Transcribe Telegram",
+      "credentials": {
+        "openAiApi": {
+          "id": "mjeY0rB89rhLQJs2",
+          "name": "OpenAi to use"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "if ($input.first().json.message.from.id !== 8233245918) {\nreturn { unauthorized: true };\n} else {\nreturn $input.all();\n}"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        496,
+        96
+      ],
+      "id": "cf563061-2dc4-43bd-851b-0d7ac9641799",
+      "name": "Anonymize"
+    },
+    {
+      "parameters": {
+        "jsCode": "// Extract stock ticker from transcribed text\nvar inputText = '';\n\n// Try to get text from various possible locations\nif ($input.item.json.transcription) {\n    inputText = $input.item.json.transcription;\n} else if ($input.item.json.text) {\n    inputText = $input.item.json.text;\n} else if ($input.item.json.result) {\n    inputText = $input.item.json.result;\n} else if ($input.item.json.transcript) {\n    inputText = $input.item.json.transcript;\n}\n\n// Convert to string if it's not already\ninputText = String(inputText);\n\n// Company name to ticker mapping\nvar companyToTicker = {\n    'apple': 'AAPL',\n    'tesla': 'TSLA',\n    'microsoft': 'MSFT',\n    'google': 'GOOGL',\n    'alphabet': 'GOOGL',\n    'amazon': 'AMZN',\n    'meta': 'META',\n    'facebook': 'META',\n    'netflix': 'NFLX',\n    'nvidia': 'NVDA',\n    'bitcoin': 'BTC',\n    'ethereum': 'ETH',\n    'amd': 'AMD',\n    'intel': 'INTC',\n    'disney': 'DIS',\n    'walmart': 'WMT',\n    'coca cola': 'KO',\n    'pepsi': 'PEP',\n    'visa': 'V',\n    'mastercard': 'MA',\n    'paypal': 'PYPL',\n    'sony': 'SONY',\n    'adobe': 'ADBE'\n};\n\nvar foundTickers = [];\nvar lowerText = inputText.toLowerCase();\n\n// Look for company names first\nfor (var company in companyToTicker) {\n    if (lowerText.indexOf(company) !== -1) {\n        foundTickers.push(companyToTicker[company]);\n    }\n}\n\n// Look for direct ticker mentions (2-5 capital letters)\nvar tickerMatches = inputText.match(/\\b[A-Z]{2,5}\\b/g);\nif (tickerMatches) {\n    for (var i = 0; i < tickerMatches.length; i++) {\n        var ticker = tickerMatches[i];\n        // Skip common words that might look like tickers\n        var commonWords = ['THE', 'AND', 'FOR', 'YOU', 'ARE', 'CAN', 'GET', 'ALL', 'NEW', 'NOW', 'TWO', 'WHO'];\n        var isCommonWord = false;\n        for (var j = 0; j < commonWords.length; j++) {\n            if (ticker === commonWords[j]) {\n                isCommonWord = true;\n                break;\n            }\n        }\n        if (!isCommonWord) {\n            foundTickers.push(ticker);\n        }\n    }\n}\n\n// Remove duplicates\nvar uniqueTickers = [];\nfor (var k = 0; k < foundTickers.length; k++) {\n    var ticker = foundTickers[k].toUpperCase();\n    var isDuplicate = false;\n    for (var l = 0; l < uniqueTickers.length; l++) {\n        if (uniqueTickers[l] === ticker) {\n            isDuplicate = true;\n            break;\n        }\n    }\n    if (!isDuplicate) {\n        uniqueTickers.push(ticker);\n    }\n}\n\n// Return the result\nreturn {\n    originalText: inputText,\n    ticker: uniqueTickers.length > 0 ? uniqueTickers[0] : null,\n    allTickers: uniqueTickers,\n    tickerCount: uniqueTickers.length\n};"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        48,
+        560
+      ],
+      "id": "5abe4847-ccda-492f-bdfe-c2754eb397b3",
+      "name": "Extract Ticker"
+    },
+    {
+      "parameters": {
+        "numberInputs": 3
+      },
+      "type": "n8n-nodes-base.merge",
+      "typeVersion": 3.2,
+      "position": [
+        672,
+        400
+      ],
+      "id": "73a3636f-5f8e-4f9a-96dc-f6508b8a3096",
+      "name": "Merge Candlestick Data"
+    },
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.merge",
+      "typeVersion": 3.2,
+      "position": [
+        1024,
+        416
+      ],
+      "id": "a325d1a4-ab54-4f25-8e66-cad38062dd69",
+      "name": "Merge All"
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "={{ $json.results }}",
+        "hasOutputParser": true,
+        "messages": {
+          "messageValues": [
+            {
+              "message": "=You are a trading and financial outlook analysis assistant. \n\nYou will be given a stock ticker symbol and a collection of news articles from the past 7 days related to that ticker.  \n\nYour task is to:\n1. Read through all provided news headlines and summaries. \n2. Determine the overall sentiment (positive, neutral, or negative) regarding the stock based on the majority tone of the news. \n3. Provide a short summary (2–3 sentences) explaining the reasoning behind the outlook. \n4. Identify any recurring themes, risks, or positive catalysts mentioned in the news. \n5. Output your analysis strictly in the following JSON format (with no extra commentary): \n\n{  \n  \"ticker\": \"<TICKER_SYMBOL>\",  \n  \"sentiment\": \"<positive | neutral | negative>\",               \"summary\": \"<brief explanation of sentiment>\" \n}\n\n\nRules:\n- Only output valid JSON.\n- Do not include any text outside of the JSON object.\n- If no relevant news articles are found, set sentiment to \"neutral\" and summary to \"No major news events found this week.\"\n"
+            }
+          ]
+        },
+        "batching": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.chainLlm",
+      "typeVersion": 1.7,
+      "position": [
+        608,
+        704
+      ],
+      "id": "24920cb1-cef7-4e7c-a4d5-ff9d9620b027",
+      "name": "Outlook Agent"
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "=This for: {{ $('Extract Ticker').item.json.ticker }}\n\nThis is the analysis I got from scraping articles:\n{{JSON.stringify($json['data all'][1]) }}\n\n\nHere is all the technical data:\n{{JSON.stringify($json['data all'][0]) }}\n\nMultiple timing frames: {{ JSON.stringify($json['data all']) }}\nTicker: {{ $('Outlook Agent').item.json.output.ticker }}\nOverall sentiment: {{ $('Outlook Agent').item.json.output.sentiment }}\nSummary: {{ $('Outlook Agent').item.json.output.summary }}\n",
+        "hasOutputParser": true,
+        "options": {
+          "systemMessage": "=You are an expert trading advisor.\n\nYou will be provided with:\n- A stock ticker symbol\n- 5-minute, 15-minute, and 1-hour price data/analysis\n- The overall sentiment and outlook from recent news\n\nYour task is to combine this information and decide whether the user should BUY, SELL, or HOLD the specified stock.\n\nIf BUY or SELL is recommended, you must also provide an entry point, stop loss, and take profit level.\n\nIf HOLD is recommended, do not include those fields, since no trade is being taken.\nIn every case, provide a concise justification (3–4 sentences).\n\nRules:\n- Only output valid JSON.\n- Recommendation must always be either \"buy\", \"sell\", or \"hold\".\n- If BUY or SELL, ensure entry, stop loss, and take profit are reasonable relative to the provided price data.\n- Keep justification concise (no more than 4 sentences).\n- If HOLD, ensure that entry, stop loss and take profit say \"N/A\".\n"
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 2,
+      "position": [
+        928,
+        704
+      ],
+      "id": "7375aac9-edfe-4d1c-9970-a5bd823d21a9",
+      "name": "Trading Agent"
+    },
+    {
+      "parameters": {
+        "chatId": "8233245918",
+        "text": "=Ticker: {{ $('Extract Ticker').item.json.ticker }}\n\nRecommendation: {{ $json.output.recommendation }}\nEntry Point: {{ $json.output.entry_point }}\nStop Loss: {{ $json.output.stop_loss }}\nTake Profit: {{ $json.output.take_profit }}\nJustification: {{ $json.output.justification }}\n",
+        "additionalFields": {
+          "appendAttribution": false
+        }
+      },
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [
+        1376,
+        704
+      ],
+      "id": "99a27ef7-6164-4268-9e9c-df874a860c2a",
+      "name": "Send a text message",
+      "webhookId": "e43c9fb0-8331-427c-afb8-6357cbc20062",
+      "credentials": {
+        "telegramApi": {
+          "id": "W26QjWJJ0vYCLFel",
+          "name": "Telegram new"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "content": "## Data Gathering\n",
+        "height": 704,
+        "width": 528,
+        "color": 4
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        0,
+        320
+      ],
+      "id": "83c22a25-6ffd-4b77-a99d-c4ff8e6fa764",
+      "name": "Sticky Note"
+    },
+    {
+      "parameters": {
+        "content": "## Response",
+        "height": 384,
+        "width": 192,
+        "color": 7
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        1328,
+        640
+      ],
+      "id": "0cc9884f-3a52-4baf-91e0-4a9724f94854",
+      "name": "Sticky Note1"
+    },
+    {
+      "parameters": {
+        "url": "=https://api.polygon.io/v2/aggs/ticker/{{ $json.ticker }}/range/15/minute/{{ $now.minus({days: 7}).toFormat('yyyy-MM-dd') }}/{{ $now.toFormat('yyyy-MM-dd') }}",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendQuery": true,
+        "queryParameters": {
+          "parameters": [
+            {
+              "name": "symbol",
+              "value": "={{ $json.ticker }}"
+            },
+            {
+              "name": "interval",
+              "value": "15min"
+            },
+            {
+              "name": "outputsize",
+              "value": "100"
+            },
+            {
+              "name": "apikey",
+              "value": "e2c64f43b2554a2d8b363c2b94463097"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        256,
+        528
+      ],
+      "id": "7eaaf8c5-9dab-44ce-8a77-a5e353f36e44",
+      "name": "15 min",
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "yLbTFETexXWUvAuk",
+          "name": "Massive Demo"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "url": "=https://api.polygon.io/v2/aggs/ticker/{{ $json.ticker }}/range/1/hour/{{ $now.minus({days: 30}).toFormat('yyyy-MM-dd') }}/{{ $now.toFormat('yyyy-MM-dd') }}",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendQuery": true,
+        "queryParameters": {
+          "parameters": [
+            {
+              "name": "symbol",
+              "value": "={{ $json.ticker }}"
+            },
+            {
+              "name": "interval",
+              "value": "1h"
+            },
+            {
+              "name": "outputsize",
+              "value": "100"
+            },
+            {
+              "name": "apikey",
+              "value": "e2c64f43b2554a2d8b363c2b94463097"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        256,
+        704
+      ],
+      "id": "07b2ac1f-6eb4-415c-842b-9e985dc3a6d6",
+      "name": "2 hour",
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "yLbTFETexXWUvAuk",
+          "name": "Massive Demo"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "url": "=https://api.polygon.io/v2/aggs/ticker/{{ $json.ticker }}/range/5/minute/{{ $now.minus({days: 1}).toFormat('yyyy-MM-dd') }}/{{ $now.toFormat('yyyy-MM-dd') }}",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendQuery": true,
+        "queryParameters": {
+          "parameters": [
+            {
+              "name": "symbol",
+              "value": "={{ $json.ticker }}"
+            },
+            {
+              "name": "interval",
+              "value": "1min"
+            },
+            {
+              "name": "outputsize",
+              "value": "100"
+            },
+            {
+              "name": "apikey",
+              "value": "e2c64f43b2554a2d8b363c2b94463097"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        256,
+        352
+      ],
+      "id": "1634086c-4377-4d33-92f6-6a543a46cfaa",
+      "name": "5 Min",
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "yLbTFETexXWUvAuk",
+          "name": "Massive Demo"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "url": "=https://api.polygon.io/v2/reference/news?ticker={{ $json.ticker }}&limit=10",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendQuery": true,
+        "queryParameters": {
+          "parameters": [
+            {
+              "name": "q",
+              "value": "={{ $json.ticker }}"
+            },
+            {
+              "name": "from",
+              "value": "={{ $today.minus(7,'days')}}"
+            },
+            {
+              "name": "sortBy",
+              "value": "popularity"
+            },
+            {
+              "name": "apiKey",
+              "value": "936d164900244f099b87b0fa7dd620e1"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        256,
+        880
+      ],
+      "id": "55633409-df1d-4e5b-877b-5fb202f8412d",
+      "name": "News over Week",
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "yLbTFETexXWUvAuk",
+          "name": "Massive Demo"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "OpenAI Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "Outlook Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Aggregate2": {
+      "main": [
+        [
+          {
+            "node": "Trading Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenAI Chat Model1": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "Trading Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Think": {
+      "ai_tool": [
+        [
+          {
+            "node": "Trading Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Aggregate3": {
+      "main": [
+        [
+          {
+            "node": "Merge All",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Structured Output Parser2": {
+      "ai_outputParser": [
+        [
+          {
+            "node": "Outlook Agent",
+            "type": "ai_outputParser",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Structured Output Parser3": {
+      "ai_outputParser": [
+        [
+          {
+            "node": "Trading Agent",
+            "type": "ai_outputParser",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Telegram Message": {
+      "main": [
+        [
+          {
+            "node": "Anonymize",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Telegram File ID": {
+      "main": [
+        [
+          {
+            "node": "Transcribe Telegram",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Anonymize": {
+      "main": [
+        [
+          {
+            "node": "Telegram File ID",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Transcribe Telegram": {
+      "main": [
+        [
+          {
+            "node": "Extract Ticker",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Extract Ticker": {
+      "main": [
+        [
+          {
+            "node": "5 Min",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "15 min",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "2 hour",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "News over Week",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Merge Candlestick Data": {
+      "main": [
+        [
+          {
+            "node": "Aggregate3",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Merge All": {
+      "main": [
+        [
+          {
+            "node": "Aggregate2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Outlook Agent": {
+      "main": [
+        [
+          {
+            "node": "Merge All",
+            "type": "main",
+            "index": 1
+          }
+        ]
+      ]
+    },
+    "Trading Agent": {
+      "main": [
+        [
+          {
+            "node": "Send a text message",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "15 min": {
+      "main": [
+        [
+          {
+            "node": "Merge Candlestick Data",
+            "type": "main",
+            "index": 1
+          }
+        ]
+      ]
+    },
+    "2 hour": {
+      "main": [
+        [
+          {
+            "node": "Merge Candlestick Data",
+            "type": "main",
+            "index": 2
+          }
+        ]
+      ]
+    },
+    "5 Min": {
+      "main": [
+        [
+          {
+            "node": "Merge Candlestick Data",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "News over Week": {
+      "main": [
+        [
+          {
+            "node": "Outlook Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "b36cec5e-0f0d-406c-9d97-89601200f80a",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "0a1effc1ca17f8f052660efca99849800c16ff58229e33eed9bdbf4d00b8766e"
+  },
+  "id": "PXnu7Mv2l87pIwLs",
+  "tags": []
+}
