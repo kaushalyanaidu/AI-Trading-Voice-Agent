@@ -1,291 +1,75 @@
-### AI Trading Advisor (Voice-Powered)
+#AI Trading Advisor: Voice-Driven Technical and News-Based Market Analysis
+##Project Overview
 
-End-to-End Automated Trading Analysis Using n8n, OpenAI \& Polygon.io
+This project builds an automated AI trading advisor that processes voice commands, retrieves real-time market data, analyzes news sentiment, and generates actionable trading recommendations. The analysis focuses on multi-timeframe technical patterns, sentiment interpretation, and integrated decision-making for buy, sell, or hold strategies.
 
+##Key Objectives
 
+- Analyze short-term and medium-term price movements across multiple timeframes
+- Evaluate sentiment direction based on recent news articles
+- Assess combined influence of technical trends and sentiment on trade decisions
+- Develop automated, data-driven trading recommendations with entry, stop-loss, and take-profit levels
 
-#### Overview
+##Dataset Description
 
+The analysis uses data and inputs collected from:
 
+- Polygon.io candlestick data (5-minute, 15-minute, and 1-hour intervals)
+- Polygon.io news data for 7-day sentiment analysis
+- Telegram voice messages transcribed using OpenAI Whisper
+- LLM-generated summaries and structured outputs
+- Automated JSON responses processed through n8n
 
-This project is an AI-powered trading advisor that converts a voice request into a full trading decision.
+Note: Due to security and API restrictions, no API keys or environment variables are included in this repository. Please refer to the setup section for configuration details.
 
+##Repository Structure
+ai-trading-advisor/
+├── workflows/
+│   └── Day_Trader.json            # Main automation workflow
+├── examples/
+│   └── sample_output.json         # Example trading output
+├── images/                        # Workflow and system diagrams
+└── README.md
 
+##Key Findings
 
-The system automatically:
+1.Market Analysis:
 
+- Multi-timeframe price data reveals momentum, volatility, and trend alignment
+- Strong signals identified when 5-minute, 15-minute, and 1-hour trends converge
 
+2.Sentiment Interpretation:
 
-Extracts the stock ticker from your voice
+- Weekly news summaries help contextualize catalysts and risks
 
+- Sentiment classification provides directional bias for trading decisions
 
+3.Trading Recommendations:
 
-Fetches multi-timeframe price data
+- Automated buy, sell, or hold signals generated using combined model logic
+- Entry, stop-loss, and take-profit values computed programmatically
 
+4.Workflow Automation:
 
+- Voice-based pipeline significantly reduces analysis time
+- Structured JSON outputs allow seamless integration with future systems
 
-Analyzes news sentiment
+##Technologies Used
 
+-n8n for workflow automation
+- OpenAI Whisper and GPT-4.1 models
+- Polygon.io APIs for market and news data
+- JavaScript for custom logic and extraction
+- Telegram Bot API for user interaction
 
+##Getting Started
 
-Combines technical + fundamental signals
+1.Clone this repository
+2.Import the workflow file into n8n
+3.Configure required API keys for Polygon.io, OpenAI, and Telegram
+4.Send a voice message to the Telegram bot to trigger analysis
 
 
+License
 
-Outputs BUY / SELL / HOLD with entry, stop-loss, and take-profit
-
-
-
-All orchestrated using n8n, OpenAI, and Telegram.
-
-
-
-##### Key Features
-
-
-
-Voice-Based Input via Telegram
-
-
-
-Automated Ticker Extraction (company names + regex logic)
-
-
-
-Multi-Timeframe Market Data (5m, 15m, 1h candles)
-
-
-
-7-Day News Scraping \& Sentiment Analysis
-
-
-
-Dual-Agent System
-
-
-
-Outlook Agent → news sentiment
-
-
-
-Trading Agent → recommendation
-
-
-
-Structured Output to Telegram
-
-
-
-Fully automated E2E pipeline (no manual steps)
-
-
-
-##### Data Sources
-
-
-
-1\. Polygon.io
-
-
-
-Price data (5m, 15m, 1h)
-
-
-
-Ticker news (last 7 days)
-
-
-
-2\. OpenAI
-
-
-
-Whisper for transcription
-
-
-
-GPT-4.1 mini for reasoning
-
-
-
-Structured JSON output
-
-
-
-3\. Telegram Bot API
-
-
-
-Voice input
-
-
-
-Final output delivery
-
-
-
-##### Architecture
-
-
-
-###### A simplified view of the workflow:
-
-
-
-Voice Message → Whisper STT → Ticker Extraction → 
-
-&nbsp;  ├─ 5m Market Data  
-
-&nbsp;  ├─ 15m Market Data  
-
-&nbsp;  ├─ 1h Market Data  
-
-&nbsp;  └─ News (7 days)  
-
-→ Outlook Agent (Sentiment)  
-
-→ Trading Agent (Decision)  
-
-→ Telegram Message (Final Output)
-
-
-
-##### How the AI Works
-
-###### 
-
-###### Outlook Agent
-
-
-
-Analyzes news for:
-
-
-
-sentiment
-
-
-
-themes
-
-
-
-catalysts
-
-
-
-risks
-
-
-
-Outputs:
-
-
-
-{ "ticker": "TSLA", "sentiment": "positive", "summary": "..." }
-
-
-
-###### Trading Agent
-
-
-
-Combines technical + sentiment data and outputs:
-
-
-
-{
-
-&nbsp; "recommendation": "buy",
-
-&nbsp; "entry\_point": 218.4,
-
-&nbsp; "stop\_loss": 209.0,
-
-&nbsp; "take\_profit": 235.5,
-
-&nbsp; "justification": "..."
-
-}
-
-
-
-###### Tech Stack
-
-
-
-n8n – workflow orchestration
-
-
-
-OpenAI Whisper – speech-to-text
-
-
-
-GPT-4.1 mini – decision engine
-
-
-
-Polygon.io – market data + news
-
-
-
-JavaScript – ticker extraction \& logic
-
-
-
-Telegram Bot API – user interface
-
-
-
-
-
-##### How to Run Locally
-
-1. &nbsp;Clone the Repository
-
-   git clone https://github.com/kaushalyanaidu/ai-trading-advisor.git
-   cd ai-trading-advisor
-   
-2. Import Workflow
-
-   Upload Day Trader.json into n8n:
-
-   Settings → Import → Select File
-   
-3. Add Credentials
-
-   OpenAI API Key
-   Polygon.io Key
-   Telegram Bot Token
-   
-4. Start Workflow
-
-
-
-Speak to your bot:
-
-
-
-“Analyze NVDA for me.”
-
-
-
-Example Output:
-
-
-<img width="741" height="400" alt="image" src="https://github.com/user-attachments/assets/c8faf149-efda-486d-b7ba-4bcdbf31f794" />
-
-
-##### 
-
-##### Future Improvements
-
-
-
-* Portfolio-based recommendations
-* Backtesting engine
-* Confidence scores
-* Custom risk profile options
-* Dashboard for trade history
-
+This project is licensed under the MIT License - see the LICENSE file for details.
