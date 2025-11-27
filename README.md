@@ -34,7 +34,7 @@ ai-trading-advisor/
 └── README.md
 ```
 
-##Key Findings
+## Key Findings
 
 1.Market Analysis:
 
@@ -65,6 +65,7 @@ ai-trading-advisor/
 - JavaScript for custom logic and extraction
 - Telegram Bot API for user interaction
 
+
 ## Getting Started
 
 1.Clone this repository
@@ -75,8 +76,14 @@ ai-trading-advisor/
 
 4.Send a voice message to the Telegram bot to trigger analysis
 
+5.Example Output
 
-License
+
+<img width="780" height="414" alt="image" src="https://github.com/user-attachments/assets/db7d7a51-a419-4fbe-8236-3d5f314426f4" />
+
+
+## License
 
 This project is licensed under the MIT License - see the LICENSE file for details.
+
 
